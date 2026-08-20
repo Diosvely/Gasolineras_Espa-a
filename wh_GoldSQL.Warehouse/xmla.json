@@ -1,0 +1,639 @@
+{
+  "name": "{{Dataset_Name}}",
+  "compatibilityLevel": 1606,
+  "model": {
+    "name": "{{Dataset_Name}}",
+    "culture": "en-US",
+    "collation": "Latin1_General_100_BIN2_UTF8",
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "dim_calendario",
+        "sourceLineageTag": "[dbo].[dim_calendario]",
+        "columns": [
+          {
+            "name": "Fecha",
+            "dataType": "dateTime",
+            "sourceColumn": "Fecha",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Fecha",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Anio",
+            "dataType": "int64",
+            "sourceColumn": "Anio",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "Anio",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Mes",
+            "dataType": "int64",
+            "sourceColumn": "Mes",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "Mes",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Dia",
+            "dataType": "int64",
+            "sourceColumn": "Dia",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "Dia",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Trimestre",
+            "dataType": "int64",
+            "sourceColumn": "Trimestre",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "Trimestre",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "DiaSemana",
+            "dataType": "int64",
+            "sourceColumn": "DiaSemana",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "DiaSemana",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "NombreMes",
+            "dataType": "string",
+            "sourceColumn": "NombreMes",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "NombreMes",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "AnioMes",
+            "dataType": "string",
+            "sourceColumn": "AnioMes",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "AnioMes",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_calendario",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "dim_combustible",
+        "sourceLineageTag": "[dbo].[dim_combustible]",
+        "columns": [
+          {
+            "name": "IDCombustible",
+            "dataType": "int64",
+            "sourceColumn": "IDCombustible",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "IDCombustible",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "TipoCombustible",
+            "dataType": "string",
+            "sourceColumn": "TipoCombustible",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "TipoCombustible",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Categoria",
+            "dataType": "string",
+            "sourceColumn": "Categoria",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Categoria",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "EsPremium",
+            "dataType": "boolean",
+            "sourceColumn": "EsPremium",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit",
+            "sourceLineageTag": "EsPremium",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "EsRenovable",
+            "dataType": "boolean",
+            "sourceColumn": "EsRenovable",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit",
+            "sourceLineageTag": "EsRenovable",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_combustible",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "dim_estacion",
+        "sourceLineageTag": "[dbo].[dim_estacion]",
+        "columns": [
+          {
+            "name": "IDEESS",
+            "dataType": "string",
+            "sourceColumn": "IDEESS",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "IDEESS",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Rotulo",
+            "dataType": "string",
+            "sourceColumn": "Rotulo",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Rotulo",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Direccion",
+            "dataType": "string",
+            "sourceColumn": "Direccion",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Direccion",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Margen",
+            "dataType": "string",
+            "sourceColumn": "Margen",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Margen",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Tipo_Venta",
+            "dataType": "string",
+            "sourceColumn": "Tipo_Venta",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Tipo_Venta",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Remision",
+            "dataType": "string",
+            "sourceColumn": "Remision",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Remision",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Latitud",
+            "dataType": "double",
+            "sourceColumn": "Latitud",
+            "sourceProviderType": "float",
+            "sourceLineageTag": "Latitud",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "Longitud_WGS84",
+            "dataType": "double",
+            "sourceColumn": "Longitud_WGS84",
+            "sourceProviderType": "float",
+            "sourceLineageTag": "Longitud_WGS84",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_estacion",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "dim_geografia",
+        "sourceLineageTag": "[dbo].[dim_geografia]",
+        "columns": [
+          {
+            "name": "IDMunicipio",
+            "dataType": "string",
+            "sourceColumn": "IDMunicipio",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "IDMunicipio",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Municipio",
+            "dataType": "string",
+            "sourceColumn": "Municipio",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Municipio",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Localidad",
+            "dataType": "string",
+            "sourceColumn": "Localidad",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Localidad",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "C_P",
+            "dataType": "string",
+            "sourceColumn": "C_P",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "C_P",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "IDProvincia",
+            "dataType": "string",
+            "sourceColumn": "IDProvincia",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "IDProvincia",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Provincia",
+            "dataType": "string",
+            "sourceColumn": "Provincia",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Provincia",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "IDCCAA",
+            "dataType": "string",
+            "sourceColumn": "IDCCAA",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "IDCCAA",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_geografia",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "fact_precios",
+        "sourceLineageTag": "[dbo].[fact_precios]",
+        "columns": [
+          {
+            "name": "IDEESS",
+            "dataType": "string",
+            "sourceColumn": "IDEESS",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "IDEESS",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "IDMunicipio",
+            "dataType": "string",
+            "sourceColumn": "IDMunicipio",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "IDMunicipio",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "FechaDato",
+            "dataType": "dateTime",
+            "sourceColumn": "FechaDato",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "FechaDato",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "IDCombustible",
+            "dataType": "int64",
+            "sourceColumn": "IDCombustible",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "IDCombustible",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Precio",
+            "dataType": "double",
+            "sourceColumn": "Precio",
+            "sourceProviderType": "float",
+            "sourceLineageTag": "Precio",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "fact_precios",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      }
+    ],
+    "expressions": [
+      {
+        "name": "DatabaseQuery",
+        "kind": "m",
+        "expression": "let\n    database = {{TDS_Endpoint}}\nin\n    database\n"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "SourceLineageTagType",
+        "value": "DatabaseFullyQualifiedName"
+      }
+    ]
+  }
+}
