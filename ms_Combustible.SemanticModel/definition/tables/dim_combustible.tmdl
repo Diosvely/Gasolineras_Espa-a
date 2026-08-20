@@ -1,0 +1,62 @@
+table dim_combustible
+	lineageTag: aa2a2c2c-126b-4028-8f0b-0e672f08e106
+	sourceLineageTag: [dbo].[dim_combustible]
+
+	column IDCombustible
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 49458598-7e5c-4295-a0ac-9be5f5fd0f4a
+		sourceLineageTag: IDCombustible
+		summarizeBy: none
+		sourceColumn: IDCombustible
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TipoCombustible
+		dataType: string
+		lineageTag: 7e31de61-fcf9-4f39-bb43-1102b394a1fd
+		sourceLineageTag: TipoCombustible
+		summarizeBy: none
+		sourceColumn: TipoCombustible
+
+		annotation SummarizationSetBy = Automatic
+
+	column Categoria
+		dataType: string
+		lineageTag: da3a6deb-3bde-4a93-9559-40444b775e89
+		sourceLineageTag: Categoria
+		summarizeBy: none
+		sourceColumn: Categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column EsPremium
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 204e19a5-b5fd-464c-b18a-be9701098ea4
+		sourceLineageTag: EsPremium
+		summarizeBy: none
+		sourceColumn: EsPremium
+
+		annotation SummarizationSetBy = Automatic
+
+	column EsRenovable
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b2cc4a74-1357-4a4f-a533-64dcc9c0ae66
+		sourceLineageTag: EsRenovable
+		summarizeBy: none
+		sourceColumn: EsRenovable
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_combustible = entity
+		mode: directLake
+		source
+			entityName: dim_combustible
+			schemaName: dbo
+			expressionSource: 'DirectLake - lh_Gold'
+
