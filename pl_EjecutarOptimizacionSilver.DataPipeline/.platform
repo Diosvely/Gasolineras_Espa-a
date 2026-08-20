@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "pl_EjecutarOptimizacionSilver"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "da55c221-2534-9170-4cab-72512502bb45"
+  }
+}

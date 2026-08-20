@@ -1,0 +1,16 @@
+relationship f07995e2-efaa-e2e4-c2fa-1fa1cb44cf0f
+	fromColumn: fact_precios.IDEESS
+	toColumn: dim_estacion.IDEESS
+
+relationship aa6fe8a3-45c3-c6b1-6c0f-eaadc70985ce
+	fromColumn: fact_precios.IDCombustible
+	toColumn: dim_combustible.IDCombustible
+
+relationship 065a1e4c-1f9a-eae6-d190-c125645221b9
+	fromColumn: fact_precios.FechaDato
+	toColumn: dim_calendario.Fecha
+
+relationship 0e40cc50-7d6c-f2bc-6220-40673dea1889
+	fromColumn: fact_precios.IDMunicipio
+	toColumn: dim_geografia.IDMunicipio
+

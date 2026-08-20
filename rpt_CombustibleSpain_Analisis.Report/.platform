@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "rpt_CombustibleSpain_Analisis"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "dab2b979-ef88-8f29-4ccd-06979f071226"
+  }
+}

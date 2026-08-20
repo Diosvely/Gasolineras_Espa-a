@@ -1,0 +1,91 @@
+table dim_calendario
+	lineageTag: b149569b-f6c7-4900-8636-0d9f0f4b374b
+	sourceLineageTag: [dbo].[dim_calendario]
+	dataCategory: Time
+
+	column Fecha
+		dataType: dateTime
+		isKey
+		formatString: General Date
+		lineageTag: 563ff14d-3918-45c2-b922-455bcf6d31cf
+		sourceLineageTag: Fecha
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		annotation SummarizationSetBy = Automatic
+
+	column Anio
+		dataType: int64
+		formatString: 0
+		lineageTag: bb36a5a0-3425-463e-ba0f-e5e41576462b
+		sourceLineageTag: Anio
+		summarizeBy: none
+		sourceColumn: Anio
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mes
+		dataType: int64
+		formatString: 0
+		lineageTag: d331b8e0-fbf6-4e80-b904-b958be4349e3
+		sourceLineageTag: Mes
+		summarizeBy: none
+		sourceColumn: Mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dia
+		dataType: int64
+		formatString: 0
+		lineageTag: 68a2c387-3ce6-4679-bf38-583f55d22741
+		sourceLineageTag: Dia
+		summarizeBy: none
+		sourceColumn: Dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: 009f5957-f053-4fd5-9287-993cc5c8d37f
+		sourceLineageTag: Trimestre
+		summarizeBy: none
+		sourceColumn: Trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiaSemana
+		dataType: int64
+		formatString: 0
+		lineageTag: f8bfe392-80e8-43f1-99be-93b1f0bcc369
+		sourceLineageTag: DiaSemana
+		summarizeBy: none
+		sourceColumn: DiaSemana
+
+		annotation SummarizationSetBy = Automatic
+
+	column NombreMes
+		dataType: string
+		lineageTag: 7316374f-3b09-43d5-8986-776762d9afdc
+		sourceLineageTag: NombreMes
+		summarizeBy: none
+		sourceColumn: NombreMes
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnioMes
+		dataType: string
+		lineageTag: 6d214111-bed3-49a6-b09c-95d5416af293
+		sourceLineageTag: AnioMes
+		summarizeBy: none
+		sourceColumn: AnioMes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_calendario = entity
+		mode: directLake
+		source
+			entityName: dim_calendario
+			schemaName: dbo
+			expressionSource: 'DirectLake - lh_Gold'
+

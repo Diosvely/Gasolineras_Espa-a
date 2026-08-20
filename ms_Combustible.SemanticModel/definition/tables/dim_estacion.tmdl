@@ -1,0 +1,96 @@
+table dim_estacion
+	lineageTag: 50f34cce-dfa3-4778-8bcd-ab1f174d1ec7
+	sourceLineageTag: [dbo].[dim_estacion]
+
+	column IDEESS
+		dataType: string
+		isHidden
+		lineageTag: 19e2a6a7-a74b-43f3-a57b-22609e863eb6
+		sourceLineageTag: IDEESS
+		summarizeBy: none
+		sourceColumn: IDEESS
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rotulo
+		dataType: string
+		lineageTag: 88056ddb-3b17-4a73-b1ea-3b52d14ab37c
+		sourceLineageTag: Rotulo
+		summarizeBy: none
+		sourceColumn: Rotulo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Direccion
+		dataType: string
+		lineageTag: ff329097-e744-4bbe-a341-5dd5706df51c
+		sourceLineageTag: Direccion
+		summarizeBy: none
+		sourceColumn: Direccion
+
+		annotation SummarizationSetBy = Automatic
+
+	column Margen
+		dataType: string
+		lineageTag: 62952433-788a-4905-be70-a55e96cbf2f1
+		sourceLineageTag: Margen
+		summarizeBy: none
+		sourceColumn: Margen
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tipo_Venta
+		dataType: string
+		lineageTag: 470680d2-3559-47f1-a8cc-2c6b508a692c
+		sourceLineageTag: Tipo_Venta
+		summarizeBy: none
+		sourceColumn: Tipo_Venta
+
+		annotation SummarizationSetBy = Automatic
+
+	column Remision
+		dataType: string
+		lineageTag: 09d64fc2-ea63-4dbf-a116-1ba079dc4637
+		sourceLineageTag: Remision
+		summarizeBy: none
+		sourceColumn: Remision
+
+		annotation SummarizationSetBy = Automatic
+
+	column Latitud
+		dataType: double
+		lineageTag: 8d054e06-3d16-48e0-9552-949dac4a5bcf
+		sourceLineageTag: Latitud
+		dataCategory: Latitude
+		summarizeBy: none
+		sourceColumn: Latitud
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Longitud_WGS84
+		dataType: double
+		lineageTag: 812f5020-fb9d-43e1-bbe1-0b1ad5c144f7
+		sourceLineageTag: Longitud_WGS84
+		dataCategory: Longitude
+		summarizeBy: none
+		sourceColumn: Longitud_WGS84
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dim_estacion = entity
+		mode: directLake
+		source
+			entityName: dim_estacion
+			schemaName: dbo
+			expressionSource: 'DirectLake - lh_Gold'
+

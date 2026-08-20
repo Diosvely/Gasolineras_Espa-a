@@ -1,0 +1,71 @@
+table fact_precios
+	lineageTag: 622635d4-58af-4c5f-a51c-e58cd09ab0bc
+	sourceLineageTag: [dbo].[fact_precios]
+
+	column IDEESS
+		dataType: string
+		isHidden
+		lineageTag: 030d8f3f-895e-42eb-8ca5-41d18a223b01
+		sourceLineageTag: IDEESS
+		summarizeBy: none
+		sourceColumn: IDEESS
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column IDMunicipio
+		dataType: string
+		isHidden
+		lineageTag: f1ddc878-0ff3-4a4f-93b8-3b677b81b16c
+		sourceLineageTag: IDMunicipio
+		summarizeBy: none
+		sourceColumn: IDMunicipio
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaDato
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b54bbd95-2361-4eff-9b92-b11f6f75f491
+		sourceLineageTag: FechaDato
+		summarizeBy: none
+		sourceColumn: FechaDato
+
+		annotation SummarizationSetBy = Automatic
+
+	column Precio
+		dataType: double
+		lineageTag: 0ef04a8e-cd36-47ea-ad5a-0787564155f9
+		sourceLineageTag: Precio
+		summarizeBy: none
+		sourceColumn: Precio
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IDCombustible
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5a42e499-6b4b-4d7a-bb79-31c9f90fa3b5
+		sourceLineageTag: IDCombustible
+		summarizeBy: none
+		sourceColumn: IDCombustible
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_precios = entity
+		mode: directLake
+		source
+			entityName: fact_precios
+			schemaName: dbo
+			expressionSource: 'DirectLake - lh_Gold'
+

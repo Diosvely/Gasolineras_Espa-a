@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/map/definition/2.0.0/schema.json",
+  "basemap": {},
+  "dataSources": [
+    {
+      "itemType": "Lakehouse",
+      "workspaceId": "00000000-0000-0000-0000-000000000000",
+      "itemId": "621bd226-8998-a25c-48ce-4b6554ce9ba1"
+    }
+  ],
+  "iconSources": [],
+  "layerSources": [],
+  "layerSettings": []
+}

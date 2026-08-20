@@ -1,0 +1,385 @@
+table _Medidas
+	lineageTag: 7111574d-858d-49de-b0f5-374080d1f04c
+
+	measure 'Precio Medio' =
+			AVERAGE ( fact_precios[Precio] )
+			-- Precio medio La medida central del proyecto
+			-- AVERAGE porque el precio NO es aditivo (sumar precios no tiene sentido).
+		formatString: 0.000
+		displayFolder: 01_Precios Base
+		lineageTag: 1da06aca-3e94-4ca3-8e3c-db2bfeb6ee41
+
+	measure 'Precio Minimo' =
+			MIN ( fact_precios[Precio] )
+			-- Precio más barato encontrado en el contexto actual.
+		formatString: 0.000
+		displayFolder: 01_Precios Base
+		lineageTag: be8c3b57-e644-42c7-a204-8d06688acc5f
+
+	measure 'Precio Maximo' =
+			MAX ( fact_precios[Precio] )
+			-- Precio más caro encontrado en el contexto actual.
+		formatString: 0.000
+		displayFolder: 01_Precios Base
+		lineageTag: 683b692d-7f80-4e9b-8257-b2970d25c762
+
+	measure 'Precio Desviacion' =
+			STDEV.P ( fact_precios[Precio] )
+			-- Dispersión de precios (cuánto varían). Alta = mucha diferencia entre gasolineras.
+		formatString: 0.000
+		displayFolder: 01_Precios Base
+		lineageTag: 35e04ae0-eb72-497a-939b-3b33b5523ecb
+
+	measure 'Rango Precio' =
+			[Precio Maximo] - [Precio Minimo]
+			-- Diferencia entre la gasolinera más cara y la más barata del contexto.
+			-- Útil para ver "cuánto puedes ahorrar" en una zona.
+		formatString: 0.000
+		displayFolder: 01_Precios Base
+		lineageTag: b1fc8c27-97b4-43e0-9189-77bd283d86df
+
+	measure 'Num Gasolineras' =
+			DISTINCTCOUNT ( fact_precios[IDEESS] )
+			-- Nº de gasolineras distintas en el contexto (DISTINCTCOUNT evita duplicados
+			-- por las múltiples fechas/combustibles de cada gasolinera).
+		formatString: #,0
+		displayFolder: 02_Conteo y Cobertura
+		lineageTag: d8a66470-6d6c-4b60-a784-bbdd31d3bd0f
+
+	measure 'Num Registros' =
+			COUNTROWS ( fact_precios )
+			-- Nº de registros de precio (filas de hechos) en el contexto.
+		formatString: #,0
+		displayFolder: 02_Conteo y Cobertura
+		lineageTag: e26df9f5-8971-4cdd-8014-5a0f4529d12b
+
+	measure 'Num Combustibles' =
+			DISTINCTCOUNT ( fact_precios[IDCombustible] )
+			-- Nº de tipos de combustible distintos vendidos en el contexto.
+		formatString: #,0
+		displayFolder: 02_Conteo y Cobertura
+		lineageTag: b09e3b9b-c730-4dd2-95a0-0e32d29f3ca1
+
+	measure 'Precio Medio Gasolina95' =
+			
+			CALCULATE (
+			    [Precio Medio],
+			    dim_combustible[TipoCombustible] = "Gasolina_95_E5"
+			)
+			
+			-- Precio medio SOLO de la Gasolina 95. CALCULATE fuerza el filtro de combustible.
+			-- Aunque el visual no filtre por combustible, esta medida siempre mira la 95.
+		formatString: 0.000
+		displayFolder: 03_Precio por Combustible
+		lineageTag: 534d6a8f-b58f-4b5d-b40a-783b1639035d
+
+	measure 'Precio Medio GasoleoA' = ```
+			
+			CALCULATE (
+			    [Precio Medio],
+			    dim_combustible[TipoCombustible] = "Gasoleo_A"
+			)
+			-- Precio medio solo del Gasóleo A (el diésel más común).
+			
+			```
+		formatString: 0.000
+		displayFolder: 03_Precio por Combustible
+		lineageTag: 1ac87190-6c14-4238-9f21-6a1f960949b7
+
+	measure 'Precio Medio Premium' =
+			
+			CALCULATE (
+			    [Precio Medio],
+			    dim_combustible[EsPremium] = TRUE ()
+			)
+			-- Precio medio solo de los combustibles PREMIUM (usa el atributo de la dimensión).
+			-- Demuestra filtrar por un atributo booleano de la dim, no por el nombre.
+		formatString: 0.000
+		displayFolder: 03_Precio por Combustible
+		lineageTag: c9e9284d-063b-484d-8977-296074dfc59f
+
+	measure 'Diferencial Premium' =
+			[Precio Medio Premium] - [Precio Medio]
+			-- Diferencial premium: cuánto más caro es el premium vs el precio medio general.
+		formatString: 0.000
+		displayFolder: 03_Precio por Combustible
+		lineageTag: 7dfeba0e-9453-4a14-b184-a9adcf62ad3f
+
+	measure 'Precio Medio YTD' = ```
+			
+			TOTALYTD (
+			    [Precio Medio],
+			    dim_calendario[Fecha]
+			)
+			-- Precio medio acumulado desde el inicio del año hasta la fecha del contexto.
+			-- TOTALYTD = Year To Date. Necesita la dim de fechas.
+			
+			```
+		formatString: 0.00
+		displayFolder: 04_Inteligencia de Tiempo
+		lineageTag: 87e13e48-70c3-4ff6-aaca-a743f6272dd9
+
+	measure 'Precio Medio Ano Anterior' = ```
+			
+			CALCULATE (
+			    [Precio Medio],
+			    SAMEPERIODLASTYEAR ( dim_calendario[Fecha] )
+			)
+			-- Precio medio del MISMO periodo del año anterior.
+			-- SAMEPERIODLASTYEAR desplaza el contexto 1 año atrás. Base para comparar YoY.
+			
+			```
+		formatString: 0.00
+		displayFolder: 04_Inteligencia de Tiempo
+		lineageTag: 54b768b7-0fb6-467a-8bb9-4cb2a961d683
+
+	measure 'Variacion YoY' =
+			
+			[Precio Medio] - [Precio Medio Ano Anterior]
+			-- Variación absoluta respecto al año anterior (€).
+		formatString: 0.000
+		displayFolder: 04_Inteligencia de Tiempo
+		lineageTag: 2b50db20-ab7e-4bf5-8433-52e314cccb98
+
+	measure 'Variacion YoY %' =
+			
+			DIVIDE (
+			    [Variacion YoY],
+			    [Precio Medio Ano Anterior]
+			)
+			-- Variación porcentual respecto al año anterior (%).
+			-- DIVIDE evita el error de dividir por cero (mejor que "/")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: 04_Inteligencia de Tiempo
+		lineageTag: 78a2cd30-129c-42bf-8955-27f7e5b48ecb
+
+	measure 'Precio Medio Mes Anterior' = ```
+			
+			CALCULATE (
+			    [Precio Medio],
+			    PREVIOUSMONTH ( dim_calendario[Fecha] )
+			)
+			-- Precio medio del periodo anterior (mes/semana previo según el visual).
+			-- PREVIOUSMONTH desplaza un mes. Útil para "vs mes pasado".
+			
+			```
+		formatString: 0.00
+		displayFolder: 04_Inteligencia de Tiempo
+		lineageTag: dde4f4f1-5567-409c-a29f-d5a81d61d09f
+
+	measure 'Precio Medio Movil 30d' = ```
+			
+			CALCULATE (
+			    [Precio Medio],
+			    DATESINPERIOD (
+			        dim_calendario[Fecha],
+			        MAX ( dim_calendario[Fecha] ),
+			        -30,
+			        DAY
+			    )
+			)
+			-- Media móvil de los últimos 30 días (suaviza la tendencia).
+			-- DATESINPERIOD construye una ventana de fechas hacia atrás.
+			
+			```
+		formatString: 0.00
+		displayFolder: 04_Inteligencia de Tiempo
+		lineageTag: f999b187-da84-42f7-a921-2a1cfb633285
+
+	measure 'Precio Medio Canarias' = ```
+			
+			CALCULATE (
+			    [Precio Medio],
+			    dim_geografia[Provincia]
+			        IN { "PALMAS (LAS)", "SANTA CRUZ DE TENERIFE" }
+			)
+			-- Precio medio SOLO en Canarias. ALL + filtro para aislar las 2 provincias canarias.
+			-- (IDs de provincia canarias: 35 Las Palmas, 38 Sta Cruz Tenerife — ajustar si difiere)
+			
+			```
+		formatString: 0.000
+		displayFolder: 05_Analisis Geografico
+		lineageTag: 7bbba096-720d-40ee-849a-c78637792bc7
+
+	measure 'Precio Medio Peninsula' =
+			
+			CALCULATE (
+			    [Precio Medio],
+			    NOT ( dim_geografia[Provincia]
+			        IN { "PALMAS (LAS)", "SANTA CRUZ DE TENERIFE" } )
+			)
+			-- Precio medio en la PENÍNSULA (todo menos Canarias).
+			-- Demuestra excluir con NOT IN.
+		formatString: 0.000
+		displayFolder: 05_Analisis Geografico
+		lineageTag: ac922e92-f798-4fdb-93a6-0ab41220e324
+
+	measure 'Ahorro Canarias' =
+			[Precio Medio Peninsula] - [Precio Medio Canarias]
+			-- El ahorro de Canarias vs península (el insight estrella del proyecto).
+		formatString: 0.000
+		displayFolder: 05_Analisis Geografico
+		lineageTag: d8d17e6b-690b-420c-8e8f-78047b2843b9
+
+	measure 'Precio Medio Nacional' =
+			
+			CALCULATE (
+			    [Precio Medio],
+			    ALL ( dim_geografia )
+			)
+			-- Precio medio nacional (ignora cualquier filtro geográfico del visual).
+			-- ALL(dim_geografia) elimina el filtro de geografía -> siempre el total nacional.
+			-- Útil como línea de referencia "media España".
+		formatString: 0.000
+		displayFolder: 05_Analisis Geografico
+		lineageTag: 5e8e26c7-bc64-4920-86ef-64566683cbc1
+
+	measure 'Diferencia vs Nacional' =
+			[Precio Medio] - [Precio Medio Nacional]
+			-- Diferencia de la zona actual respecto a la media nacional.
+			-- Positivo = más cara que la media; negativo = más barata.
+		formatString: 0.000
+		displayFolder: 05_Analisis Geografico
+		lineageTag: 6a35d288-30b6-40d4-a40e-ed0adb90c12e
+
+	measure 'Ranking Provincia Cara' = ```
+			
+			RANKX (
+			    ALL ( dim_geografia[Provincia] ),
+			    [Precio Medio],
+			    ,
+			    DESC
+			)
+			-- Ranking de provincias por precio medio (1 = más cara).
+			-- RANKX recorre TODAS las provincias y asigna posición.
+			
+			```
+		formatString: #,0
+		displayFolder: 06_Rankings
+		lineageTag: e929ba3d-7612-46e4-adb1-216b288eabde
+
+	measure 'Ranking Provincia Barata' =
+			
+			RANKX (
+			    ALL ( dim_geografia[Provincia] ),
+			    [Precio Medio],
+			    ,
+			    ASC
+			)
+			-- Ranking inverso (1 = provincia más BARATA)
+		formatString: #,0
+		displayFolder: 06_Rankings
+		lineageTag: 595e0807-e17a-48ba-86af-ce16c72db0b6
+
+	measure 'Ranking Marca Cara' = ```
+			
+			RANKX (
+			    ALL ( dim_estacion[Rotulo] ),
+			    [Precio Medio],
+			    ,
+			    DESC
+			)
+			-- Ranking de marcas (Rótulo) por precio medio (1 = marca más cara).
+			
+			```
+		formatString: #,0
+		displayFolder: 06_Rankings
+		lineageTag: 7d4e3734-d3e5-417a-8a8d-57ebc3a561c1
+
+	measure 'Ultima Fecha' =
+			CALCULATE ( MAX ( fact_precios[FechaDato] ), ALL ( dim_calendario ) )
+			-- Ultima fecha CON DATOS reales (no el fin del calendario).
+		formatString: Short Date
+		displayFolder: 07_KPIs Formato
+		lineageTag: 4f2bfd88-9925-412a-a7a3-612f44df89aa
+
+	measure 'Precio Actual' =
+			
+			VAR UltimaFecha =
+			    CALCULATE ( MAX ( fact_precios[FechaDato] ), ALL ( dim_calendario ) )
+			RETURN
+			CALCULATE (
+			    [Precio Medio],
+			    dim_calendario[Fecha] = UltimaFecha
+			)
+			-- Precio medio de la ultima fecha CON DATOS (no la ultima del calendario).
+			-- ALL(dim_calendario) evita que el filtro de fecha del visual limite el MAX.
+		formatString: 0.000
+		displayFolder: 07_KPIs Formato
+		lineageTag: b9601eb4-314a-4803-81a5-00c6bffa087d
+
+	measure 'Precio Medio Texto' =
+			
+			FORMAT ( [Precio Medio], "0.000 €" )
+			-- Texto dinámico con el precio medio formateado en euros (para tarjetas/títulos).
+		displayFolder: 07_KPIs Formato
+		lineageTag: 07b1e8eb-c32d-4506-98fb-87d56add39a1
+
+	measure 'Semaforo Precio' =
+			
+			VAR Dif = [Precio Medio] - [Precio Medio Nacional]
+			RETURN
+			SWITCH ( TRUE (),
+			    Dif > 0.05,  "Caro",
+			    Dif < -0.05, "Barato",
+			    "En la media"
+			)
+			-- Clasifica cada provincia/gasolinera como Cara/Barata/Media.
+		displayFolder: 07_KPIs Formato
+		lineageTag: c967ae17-fa91-4f41-929d-0c2e085d7c9d
+
+	measure 'Precio vs Seleccion' =
+			
+			DIVIDE ( [Precio Medio],
+			    CALCULATE ( [Precio Medio], ALLSELECTED ( dim_geografia[Provincia] ) ) )
+			    -- Compara el precio de una provincia contra las que el usuario tenga seleccionadas.
+		formatString: 0.000
+		displayFolder: 07_KPIs Formato
+		lineageTag: 12ec4923-2d09-42dd-adf1-78ce6dce9ea6
+
+	measure 'Precio Medio por Estacion' =
+			
+			CALCULATE ( [Precio Medio], ALLEXCEPT ( dim_estacion, dim_estacion[IDEESS] ) )
+			-- Precio medio de cada gasolinera ignorando otros filtros.
+		formatString: 0.000
+		displayFolder: 07_KPIs Formato
+		lineageTag: 48f6cc3f-c498-4639-99d5-724cc5a892f4
+
+	measure 'Latitud Provincia' =
+			CALCULATE (
+			    AVERAGE ( dim_estacion[Latitud] ),
+			    CROSSFILTER ( fact_precios[IDEESS], dim_estacion[IDEESS], BOTH )
+			)
+			-- Latitud media de las gasolineras del contexto (provincia, municipio...).
+			-- CROSSFILTER activa el filtro bidireccional solo aqui: sin el, el filtro de
+			-- dim_geografia llega a fact_precios pero NO sube a dim_estacion.
+		formatString: 0.00000
+		displayFolder: 08_Geolocalizacion
+		lineageTag: 6fa1f1d3-6cba-429b-983f-fbcd68c8624e
+
+	measure 'Longitud Provincia' =
+			CALCULATE (
+			    AVERAGE ( dim_estacion[Longitud_WGS84] ),
+			    CROSSFILTER ( fact_precios[IDEESS], dim_estacion[IDEESS], BOTH )
+			)
+			-- Longitud media de las gasolineras del contexto. Ver nota en Latitud Provincia.
+		formatString: 0.00000
+		displayFolder: 08_Geolocalizacion
+		lineageTag: b2bd4bbb-e1e7-4bd0-aa44-9644c6885251
+
+	column Placeholder
+		isHidden
+		formatString: 0
+		lineageTag: 9fc3a424-454f-4552-9ec0-744b29e1d852
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Placeholder]
+
+		annotation SummarizationSetBy = User
+
+	partition _Medidas = calculated
+		mode: import
+		source = ROW("Placeholder", BLANK())
+
+	annotation PBI_Id = a41b572d03964357a6ad88e1c5374b26
+

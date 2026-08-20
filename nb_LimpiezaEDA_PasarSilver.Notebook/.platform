@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "nb_LimpiezaEDA_PasarSilver",
+    "description": "Aqui hago la limpieza segun lo que el Notebook EDA nos valla dando y hacemos  la limpieza y dejamos en silver la data lista para crear dimensiones en GOLD y explotar de otra forma."
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "7e430318-791d-9135-4aa3-fe2f47b3b469"
+  }
+}

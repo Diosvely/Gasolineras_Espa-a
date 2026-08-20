@@ -1,0 +1,95 @@
+table dim_geografia
+	lineageTag: 37e1a0f3-9602-4f00-88a7-3ce455fb9c3f
+	sourceLineageTag: [dbo].[dim_geografia]
+
+	column IDMunicipio
+		dataType: string
+		isHidden
+		lineageTag: 24d9d7e5-2092-4101-b503-277e9c5a84ad
+		sourceLineageTag: IDMunicipio
+		summarizeBy: none
+		sourceColumn: IDMunicipio
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Municipio
+		dataType: string
+		lineageTag: 494986f2-0015-4c66-95aa-5340009d4c14
+		sourceLineageTag: Municipio
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: Municipio
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column Localidad
+		dataType: string
+		lineageTag: 6d477f4f-e903-4a83-8470-973fe56ceb5f
+		sourceLineageTag: Localidad
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: Localidad
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column C_P
+		dataType: string
+		lineageTag: 3bc9e571-6e45-414e-ba44-60a635af288e
+		sourceLineageTag: C_P
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: C_P
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column IDProvincia
+		dataType: string
+		isHidden
+		lineageTag: c52c7913-4bca-4b3c-82c2-c7f8145b75cc
+		sourceLineageTag: IDProvincia
+		summarizeBy: none
+		sourceColumn: IDProvincia
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Provincia
+		dataType: string
+		lineageTag: acf90236-0960-4e01-a2c6-0b96569f2f79
+		sourceLineageTag: Provincia
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: Provincia
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column IDCCAA
+		dataType: string
+		isHidden
+		lineageTag: a16f984f-bd85-4941-8416-198a35027d56
+		sourceLineageTag: IDCCAA
+		summarizeBy: none
+		sourceColumn: IDCCAA
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_geografia = entity
+		mode: directLake
+		source
+			entityName: dim_geografia
+			schemaName: dbo
+			expressionSource: 'DirectLake - lh_Gold'
+
