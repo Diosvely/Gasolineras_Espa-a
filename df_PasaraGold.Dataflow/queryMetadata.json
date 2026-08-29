@@ -1,0 +1,10 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowModernEvaluationEngine": true
+  },
+  "name": "df_PasaraGold",
+  "queryGroups": [],
+  "documentLocale": "en-ES",
+  "connections": []
+}

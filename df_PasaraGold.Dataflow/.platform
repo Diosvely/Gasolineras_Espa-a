@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "df_PasaraGold"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "161c099d-dc28-a7c2-45d0-af5b0f009680"
+  }
+}
