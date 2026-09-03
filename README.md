@@ -23,6 +23,7 @@ Informe	rpt_CombustibleSpain_Analisis	4 páginas de análisis
 Orquestación mediante un task flow de Fabric que refleja el flujo Bronze → Silver → Gold → Visualize.
 
 ⭐ Modelo semántico
+<img width="615" height="331" alt="image" src="https://github.com/user-attachments/assets/665e8540-f9bc-458f-bd15-8cdbbc55eeef" />
 
 Esquema en estrella con fact_precios en el centro y cuatro dimensiones. Todas las tablas de datos en modo Direct Lake; la tabla de medidas es calculada.
 
