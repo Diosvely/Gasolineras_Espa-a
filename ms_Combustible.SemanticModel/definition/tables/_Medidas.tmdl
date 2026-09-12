@@ -5,28 +5,28 @@ table _Medidas
 			AVERAGE ( fact_precios[Precio] )
 			-- Precio medio La medida central del proyecto
 			-- AVERAGE porque el precio NO es aditivo (sumar precios no tiene sentido).
-		formatString: 0.000
+		formatString: #,0.000\ "€";-#,0.000\ "€";#,0.000\ "€"
 		displayFolder: 01_Precios Base
 		lineageTag: 1da06aca-3e94-4ca3-8e3c-db2bfeb6ee41
 
 	measure 'Precio Minimo' =
 			MIN ( fact_precios[Precio] )
 			-- Precio más barato encontrado en el contexto actual.
-		formatString: 0.000
+		formatString: #,0.000\ "€";-#,0.000\ "€";#,0.000\ "€"
 		displayFolder: 01_Precios Base
 		lineageTag: be8c3b57-e644-42c7-a204-8d06688acc5f
 
 	measure 'Precio Maximo' =
 			MAX ( fact_precios[Precio] )
 			-- Precio más caro encontrado en el contexto actual.
-		formatString: 0.000
+		formatString: #,0.000\ "€";-#,0.000\ "€";#,0.000\ "€"
 		displayFolder: 01_Precios Base
 		lineageTag: 683b692d-7f80-4e9b-8257-b2970d25c762
 
 	measure 'Precio Desviacion' =
 			STDEV.P ( fact_precios[Precio] )
 			-- Dispersión de precios (cuánto varían). Alta = mucha diferencia entre gasolineras.
-		formatString: 0.000
+		formatString: #,0.000\ "€";-#,0.000\ "€";#,0.000\ "€"
 		displayFolder: 01_Precios Base
 		lineageTag: 35e04ae0-eb72-497a-939b-3b33b5523ecb
 
@@ -34,7 +34,7 @@ table _Medidas
 			[Precio Maximo] - [Precio Minimo]
 			-- Diferencia entre la gasolinera más cara y la más barata del contexto.
 			-- Útil para ver "cuánto puedes ahorrar" en una zona.
-		formatString: 0.000
+		formatString: #,0.000\ "€";-#,0.000\ "€";#,0.000\ "€"
 		displayFolder: 01_Precios Base
 		lineageTag: b1fc8c27-97b4-43e0-9189-77bd283d86df
 
@@ -69,7 +69,7 @@ table _Medidas
 			
 			-- Precio medio SOLO de la Gasolina 95. CALCULATE fuerza el filtro de combustible.
 			-- Aunque el visual no filtre por combustible, esta medida siempre mira la 95.
-		formatString: 0.000
+		formatString: #,0.000\ "€";-#,0.000\ "€";#,0.000\ "€"
 		displayFolder: 03_Precio por Combustible
 		lineageTag: 534d6a8f-b58f-4b5d-b40a-783b1639035d
 
@@ -82,7 +82,7 @@ table _Medidas
 			-- Precio medio solo del Gasóleo A (el diésel más común).
 			
 			```
-		formatString: 0.000
+		formatString: #,0.000\ "€";-#,0.000\ "€";#,0.000\ "€"
 		displayFolder: 03_Precio por Combustible
 		lineageTag: 1ac87190-6c14-4238-9f21-6a1f960949b7
 
@@ -94,14 +94,14 @@ table _Medidas
 			)
 			-- Precio medio solo de los combustibles PREMIUM (usa el atributo de la dimensión).
 			-- Demuestra filtrar por un atributo booleano de la dim, no por el nombre.
-		formatString: 0.000
+		formatString: #,0.000\ "€";-#,0.000\ "€";#,0.000\ "€"
 		displayFolder: 03_Precio por Combustible
 		lineageTag: c9e9284d-063b-484d-8977-296074dfc59f
 
 	measure 'Diferencial Premium' =
 			[Precio Medio Premium] - [Precio Medio]
 			-- Diferencial premium: cuánto más caro es el premium vs el precio medio general.
-		formatString: 0.000
+		formatString: #,0.000\ "€";-#,0.000\ "€";#,0.000\ "€"
 		displayFolder: 03_Precio por Combustible
 		lineageTag: 7dfeba0e-9453-4a14-b184-a9adcf62ad3f
 
@@ -197,7 +197,7 @@ table _Medidas
 			-- (IDs de provincia canarias: 35 Las Palmas, 38 Sta Cruz Tenerife — ajustar si difiere)
 			
 			```
-		formatString: 0.000
+		formatString: #,0.000\ "€";-#,0.000\ "€";#,0.000\ "€"
 		displayFolder: 05_Analisis Geografico
 		lineageTag: 7bbba096-720d-40ee-849a-c78637792bc7
 
@@ -210,14 +210,14 @@ table _Medidas
 			)
 			-- Precio medio en la PENÍNSULA (todo menos Canarias).
 			-- Demuestra excluir con NOT IN.
-		formatString: 0.000
+		formatString: #,0.000\ "€";-#,0.000\ "€";#,0.000\ "€"
 		displayFolder: 05_Analisis Geografico
 		lineageTag: ac922e92-f798-4fdb-93a6-0ab41220e324
 
 	measure 'Ahorro Canarias' =
 			[Precio Medio Peninsula] - [Precio Medio Canarias]
 			-- El ahorro de Canarias vs península (el insight estrella del proyecto).
-		formatString: 0.000
+		formatString: #,0.000\ "€";-#,0.000\ "€";#,0.000\ "€"
 		displayFolder: 05_Analisis Geografico
 		lineageTag: d8d17e6b-690b-420c-8e8f-78047b2843b9
 
@@ -230,7 +230,7 @@ table _Medidas
 			-- Precio medio nacional (ignora cualquier filtro geográfico del visual).
 			-- ALL(dim_geografia) elimina el filtro de geografía -> siempre el total nacional.
 			-- Útil como línea de referencia "media España".
-		formatString: 0.000
+		formatString: #,0.000\ "€";-#,0.000\ "€";#,0.000\ "€"
 		displayFolder: 05_Analisis Geografico
 		lineageTag: 5e8e26c7-bc64-4920-86ef-64566683cbc1
 
@@ -238,7 +238,7 @@ table _Medidas
 			[Precio Medio] - [Precio Medio Nacional]
 			-- Diferencia de la zona actual respecto a la media nacional.
 			-- Positivo = más cara que la media; negativo = más barata.
-		formatString: 0.000
+		formatString: #,0.000\ "€";-#,0.000\ "€";#,0.000\ "€"
 		displayFolder: 05_Analisis Geografico
 		lineageTag: 6a35d288-30b6-40d4-a40e-ed0adb90c12e
 
@@ -304,7 +304,7 @@ table _Medidas
 			)
 			-- Precio medio de la ultima fecha CON DATOS (no la ultima del calendario).
 			-- ALL(dim_calendario) evita que el filtro de fecha del visual limite el MAX.
-		formatString: 0.000
+		formatString: #,0.000\ "€";-#,0.000\ "€";#,0.000\ "€"
 		displayFolder: 07_KPIs Formato
 		lineageTag: b9601eb4-314a-4803-81a5-00c6bffa087d
 
@@ -366,6 +366,92 @@ table _Medidas
 		formatString: 0.00000
 		displayFolder: 08_Geolocalizacion
 		lineageTag: b2bd4bbb-e1e7-4bd0-aa44-9644c6885251
+
+	measure 'Precio MoM %' =
+			
+			VAR _HayFiltro = ISFILTERED ( dim_calendario[AnioMes] )
+			VAR _FechaRef =
+			    IF (
+			        _HayFiltro,
+			        MAX ( dim_calendario[Fecha] ),
+			        CALCULATE ( MAX ( fact_precios[FechaDato] ), ALL ( dim_calendario ) )
+			    )
+			VAR _InicioMes = DATE ( YEAR ( _FechaRef ), MONTH ( _FechaRef ), 1 )
+			VAR _MesAnterior =
+			    CALCULATE (
+			        [Precio Medio],
+			        REMOVEFILTERS ( dim_calendario ),
+			        DATESBETWEEN (
+			            dim_calendario[Fecha],
+			            EOMONTH ( _InicioMes, -2 ) + 1,
+			            EOMONTH ( _InicioMes, -1 )
+			        )
+			    )
+			VAR _MesActual =
+			    CALCULATE (
+			        [Precio Medio],
+			        REMOVEFILTERS ( dim_calendario ),
+			        DATESBETWEEN (
+			            dim_calendario[Fecha],
+			            EOMONTH ( _InicioMes, -1 ) + 1,
+			            EOMONTH ( _InicioMes, 0 )
+			        )
+			    )
+			RETURN
+			    IF (
+			        _MesAnterior > 0,
+			        DIVIDE ( _MesActual - _MesAnterior, _MesAnterior )
+			    )
+		displayFolder: 04_Inteligencia de Tiempo
+		lineageTag: 4e0e482f-9431-49b5-b50f-e8faac3c07ab
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Precio MoM % Texto' =
+			
+			VAR _MoM = [Precio MoM %]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( _MoM ), "",
+			        _MoM > 0, "▲ " & FORMAT ( ABS ( _MoM ), "0.0%" ),
+			        _MoM < 0, "▼ " & FORMAT ( ABS ( _MoM ), "0.0%" ),
+			        "– 0,0%"
+			    )
+		displayFolder: 04_Inteligencia de Tiempo
+		lineageTag: 996cb55e-8b3d-4347-b2cd-cedae6ae15b6
+
+	measure 'Precio MoM % Color' =
+			
+			VAR _MoM = [Precio MoM %]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( _MoM ), "#888780",
+			        _MoM > 0, "#D85A30",
+			        _MoM < 0, "#1D9E75",
+			        "#888780"
+			    )
+		displayFolder: 04_Inteligencia de Tiempo
+		lineageTag: 94288136-8573-49a6-81f7-367735e76c8a
+
+	measure 'Etiqueta MoM' =
+			
+			VAR _HayFiltro = ISFILTERED ( dim_calendario[AnioMes] )
+			VAR _FechaRef =
+			    IF (
+			        _HayFiltro,
+			        MAX ( dim_calendario[Fecha] ),
+			        CALCULATE ( MAX ( fact_precios[FechaDato] ), ALL ( dim_calendario ) )
+			    )
+			VAR _InicioMes = DATE ( YEAR ( _FechaRef ), MONTH ( _FechaRef ), 1 )
+			RETURN
+			    "MoM % | "
+			        & FORMAT ( EOMONTH ( _InicioMes, 0 ), "mmm yy" )
+			        & " vs "
+			        & FORMAT ( EOMONTH ( _InicioMes, -1 ), "mmm yy" )
+		displayFolder: 04_Inteligencia de Tiempo
+		lineageTag: 3644ae92-2d5b-498d-aa76-088b958837dd
 
 	column Placeholder
 		isHidden
